@@ -7,9 +7,7 @@ public class Coin : MonoBehaviour
 {
 	//Create a reference to the CoinPoofPrefab
 	public GameObject coinProof;
-
 	public GameObject coin;
-
 
 	public void OnCoinClicked ()
 	{
@@ -17,10 +15,10 @@ public class Coin : MonoBehaviour
 		// Make sure the poof animates vertically
 		// Destroy this coin. Check the Unity documentation on how to use Destroy
 		 
+//
+		GameObject _coinProof = (GameObject)Object.Instantiate (coinProof, coin.transform.position, Quaternion.identity);
+		_coinProof.transform.Rotate(-90f, 0f, 0f, Space.World);
 		Destroy (coin);
-		GameObject _coinProof = (GameObject)Object.Instantiate (coinProof, new Vector3 (-28f, 10f, -60f), Quaternion.identity);
-		_coinProof.transform.Rotate(0f, 90f, 0f, Space.World);
-
 	}
 
 }

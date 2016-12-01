@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
 	// Create a boolean value called "locked" that can be checked in Update()
 
 	bool locked = true;
-	bool keyCollected = false;
+	private Key key;
 	public AudioSource clip_lock;
 	public AudioSource clip_unlock;
 
@@ -17,8 +17,12 @@ public class Door : MonoBehaviour
 	{
 		// If the door is unlocked and it is not fully raised
 		// Animate the door raising up
-
-		if (locked == false && keyCollected == true) {
+		GameObject keyObject = GameObject.Find ("Key");
+		if (keyObject) {
+			key = keyObject.GetComponent<Key> ();
+		}
+		
+		if (locked == false && key.keyCollected == true) {
 			if (transform.position.y < 25f) {
 				transform.Translate (0, 5f * Time.deltaTime, 0, Space.World);
 			} else {
@@ -27,13 +31,14 @@ public class Door : MonoBehaviour
 
 
 		}  
-			 
+	        
 	}
 
 	public void Unlock ()
 	{
 		// You'll need to set "locked" to false here
-		if (keyCollected == true) {
+
+		if (key.keyCollected == true) {
 			locked = false;
 			clip_unlock.Play ();
 		} else {
@@ -42,8 +47,5 @@ public class Door : MonoBehaviour
 
 	}
 
-	public void keyClicked ()
-	{
-		keyCollected = true;
-	}
+
 }
